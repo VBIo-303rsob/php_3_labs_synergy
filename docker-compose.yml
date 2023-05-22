@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    environment: 
+      - TZ=Europe/Moscow
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./html:/var/www/html
+    depends_on:
+      - php
+
+  php:
+    image: php:7.4-fpm
+    environment: 
+      - TZ=Europe/Moscow
+    volumes:
+      - ./html:/var/www/html
